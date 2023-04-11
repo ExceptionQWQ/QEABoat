@@ -1,1 +1,1 @@
-ffmpeg -i /dev/video0 -vf scale=640:480 -f flv rtmp://47.109.94.68:1935/live
+ffmpeg -i /dev/video0 -an -vf scale=640:480 -vcodec flv -f flv rtmp://47.109.94.68:1935/live
