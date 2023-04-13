@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">QEABoat</string>
+    <string name="stopButton">停机</string>
+    <string name="reconnectButton">重连</string>
+    <string name="connectStatus">连接状态：</string>
+    <string name="batteryLevel">电池电量：</string>
+    <string name="speedLevel">运行速度：</string>
+    <string name="pedal">油门：</string>
+    <string name="direction">方向：</string>
 </resources>

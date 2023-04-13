@@ -4,11 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".MainActivity">
 
     <com.busybox.qeaboat.IjkMediaPlayerView
         android:id="@+id/ijkMediaPlayerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.busybox.qeaboat.IjkMediaPlayerView>
+        android:layout_height="match_parent">
+
+    </com.busybox.qeaboat.IjkMediaPlayerView>
+
+    <RelativeLayout
+        android:id="@+id/playerRelativeLayout"
+        android:padding="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/stopButton"
+            android:text="@string/stopButton"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:background="@color/purple_500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Button>
+        <Button
+            android:layout_marginLeft="20dp"
+            android:id="@+id/reconnectButton"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:background="@color/purple_500"
+            android:layout_toRightOf="@id/stopButton"
+            android:text="@string/reconnectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Button>
+
+        <TextView
+            android:id="@+id/connectStatusText"
+            android:layout_below="@id/stopButton"
+            android:text="@string/connectStatus"
+            android:textColor="@color/red"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+        <TextView
+            android:id="@+id/batteryLevelText"
+            android:layout_below="@id/connectStatusText"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="@string/batteryLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+        <TextView
+            android:id="@+id/speedLevelText"
+            android:layout_below="@id/batteryLevelText"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="@string/speedLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+        <TextView
+            android:id="@+id/pedalText"
+            android:layout_below="@id/speedLevelText"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="@string/pedal"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"></TextView>
+        <SeekBar
+            android:id="@+id/pedalBar"
+            android:layout_below="@id/speedLevelText"
+            android:layout_toRightOf="@id/pedalText"
+            android:progress="0"
+            android:max="100"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></SeekBar>
+        <TextView
+            android:id="@+id/directionText"
+            android:layout_below="@id/pedalText"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="@string/direction"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"></TextView>
+        <SeekBar
+            android:id="@+id/directionBar"
+            android:layout_below="@id/pedalText"
+            android:layout_toRightOf="@id/directionText"
+            android:progress="0"
+            android:max="100"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></SeekBar>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
