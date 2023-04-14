@@ -1,10 +1,13 @@
 package com.busybox.qeaboat;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
@@ -32,6 +35,9 @@ public class MainActivity extends Activity {
     private TextView connectStatusView;
     private TextView batteryLevelView;
     private TextView speedLevelView;
+
+    public static Handler updateBatteryLevel;
+    public static Handler updateSpeedLevel;
 
     public boolean setConnectStatus(boolean status)
     {
@@ -91,6 +97,8 @@ public class MainActivity extends Activity {
         InitAllViewComponent();
         RegistSeekBarListener();
 
+        new ScheduleEngine().start();
+
         ijkMediaPlayerView = findViewById(R.id.ijkMediaPlayerView);
         ijkMediaPlayerView.setListener(new VideoPlayerListener() {
             @Override
@@ -131,6 +139,23 @@ public class MainActivity extends Activity {
 
         ijkMediaPlayerView.setVideoPath(path);
         ijkMediaPlayerView.start();
+
+
+        updateBatteryLevel = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message message) {
+                batteryLevelView.setText("电池电量：" + message.obj);
+                return false;
+            }
+        });
+
+        updateSpeedLevel = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message message) {
+                speedLevelView.setText("运行速度：" + message.obj);
+                return false;
+            }
+        });
 
     }
 
