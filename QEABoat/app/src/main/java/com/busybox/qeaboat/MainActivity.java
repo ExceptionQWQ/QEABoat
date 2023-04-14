@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -31,34 +32,6 @@ public class MainActivity extends Activity {
     private TextView connectStatusView;
     private TextView batteryLevelView;
     private TextView speedLevelView;
-    private TextView pedalView;
-    private TextView directionView;
-    private SeekBar pedalBar;
-    private SeekBar directionBar;
-
-    public int getPedalLevel()
-    {
-        return pedalBar.getProgress();
-    }
-
-    public int setPedalLevel(int level)
-    {
-        pedalView.setText("油门：" + String.valueOf(level));
-        pedalBar.setProgress(level);
-        return level;
-    }
-
-    public int getDirectionLevel()
-    {
-        return directionBar.getProgress();
-    }
-
-    public int setDirectionLevel(int level)
-    {
-        directionView.setText("方向：" + String.valueOf(level));
-        directionBar.setProgress(level);
-        return level;
-    }
 
     public boolean setConnectStatus(boolean status)
     {
@@ -91,53 +64,14 @@ public class MainActivity extends Activity {
         connectStatusView = findViewById(R.id.connectStatusText);
         batteryLevelView = findViewById(R.id.batteryLevelText);
         speedLevelView = findViewById(R.id.speedLevelText);
-        pedalView = findViewById(R.id.pedalText);
-        directionView = findViewById(R.id.directionText);
-        pedalBar = findViewById(R.id.pedalBar);
-        directionBar = findViewById(R.id.directionBar);
 
         setConnectStatus(false);
         setBatteryLevel(0);
         setSpeedLevel(0);
-        setPedalLevel(0);
-        setDirectionLevel(directionBar.getMax() / 2);
     }
 
     private void RegistSeekBarListener()
     {
-        pedalBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                setPedalLevel(i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        directionBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                setDirectionLevel(i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
 
     }
 

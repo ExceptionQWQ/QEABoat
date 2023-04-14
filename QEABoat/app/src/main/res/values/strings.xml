@@ -5,6 +5,4 @@
     <string name="connectStatus">连接状态：</string>
     <string name="batteryLevel">电池电量：</string>
     <string name="speedLevel">运行速度：</string>
-    <string name="pedal">油门：</string>
-    <string name="direction">方向：</string>
 </resources>

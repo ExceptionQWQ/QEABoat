@@ -11,10 +11,10 @@
         android:id="@+id/ijkMediaPlayerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
     </com.busybox.qeaboat.IjkMediaPlayerView>
 
     <RelativeLayout
+        android:background="@color/white"
         android:id="@+id/playerRelativeLayout"
         android:padding="30dp"
         android:layout_width="match_parent"
@@ -23,16 +23,16 @@
             android:id="@+id/stopButton"
             android:text="@string/stopButton"
             android:textSize="20dp"
-            android:textColor="@color/white"
-            android:background="@color/purple_500"
+            android:textColor="@color/red"
+            android:background="#2F6200EE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></Button>
         <Button
             android:layout_marginLeft="20dp"
             android:id="@+id/reconnectButton"
             android:textSize="20dp"
-            android:textColor="@color/white"
-            android:background="@color/purple_500"
+            android:textColor="@color/green"
+            android:background="#2F6200EE"
             android:layout_toRightOf="@id/stopButton"
             android:text="@string/reconnectButton"
             android:layout_width="wrap_content"
@@ -40,7 +40,8 @@
 
         <TextView
             android:id="@+id/connectStatusText"
-            android:layout_below="@id/stopButton"
+            android:layout_toRightOf="@id/reconnectButton"
+            android:layout_marginLeft="20dp"
             android:text="@string/connectStatus"
             android:textColor="@color/red"
             android:textSize="20dp"
@@ -48,52 +49,58 @@
             android:layout_height="wrap_content"></TextView>
         <TextView
             android:id="@+id/batteryLevelText"
-            android:layout_below="@id/connectStatusText"
-            android:textColor="@color/black"
+            android:layout_toRightOf="@id/connectStatusText"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/green"
             android:textSize="20dp"
             android:text="@string/batteryLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></TextView>
         <TextView
             android:id="@+id/speedLevelText"
-            android:layout_below="@id/batteryLevelText"
-            android:textColor="@color/black"
+            android:layout_toRightOf="@id/batteryLevelText"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/green"
             android:textSize="20dp"
             android:text="@string/speedLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></TextView>
-        <TextView
-            android:id="@+id/pedalText"
-            android:layout_below="@id/speedLevelText"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:text="@string/pedal"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"></TextView>
-        <SeekBar
-            android:id="@+id/pedalBar"
-            android:layout_below="@id/speedLevelText"
-            android:layout_toRightOf="@id/pedalText"
-            android:progress="0"
-            android:max="100"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></SeekBar>
-        <TextView
-            android:id="@+id/directionText"
-            android:layout_below="@id/pedalText"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:text="@string/direction"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"></TextView>
-        <SeekBar
-            android:id="@+id/directionBar"
-            android:layout_below="@id/pedalText"
-            android:layout_toRightOf="@id/directionText"
-            android:progress="0"
-            android:max="100"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></SeekBar>
+
+        <Button
+            android:id="@+id/pedalDown"
+            android:rotation="90"
+            android:background="@drawable/pedal_right"
+            android:layout_alignParentBottom="true"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></Button>
+
+        <Button
+            android:id="@+id/pedalUp"
+            android:rotation="-90"
+            android:background="@drawable/pedal_right"
+            android:layout_marginBottom="50dp"
+            android:layout_above="@id/pedalDown"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></Button>
+
+        <Button
+            android:id="@+id/pedalRight"
+            android:background="@drawable/pedal_right"
+            android:layout_above="@id/pedalDown"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></Button>
+
+        <Button
+            android:id="@+id/pedalLeft"
+            android:background="@drawable/pedal_right"
+            android:layout_above="@id/pedalDown"
+            android:layout_toLeftOf="@id/pedalRight"
+            android:rotation="180"
+            android:layout_marginRight="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></Button>
 
     </RelativeLayout>
 
