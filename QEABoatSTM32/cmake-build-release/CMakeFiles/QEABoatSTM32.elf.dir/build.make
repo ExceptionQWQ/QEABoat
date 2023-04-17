@@ -328,6 +328,19 @@ CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_t
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c.s"
 	/Applications/Arm/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c -o CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c.s
 
+CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.obj: CMakeFiles/QEABoatSTM32.elf.dir/flags.make
+CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.obj: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.obj"
+	/Applications/Arm/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.obj -c /Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c
+
+CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.i"
+	/Applications/Arm/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c > CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.i
+
+CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.s"
+	/Applications/Arm/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c -o CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.s
+
 # Object files for target QEABoatSTM32.elf
 QEABoatSTM32_elf_OBJECTS = \
 "CMakeFiles/QEABoatSTM32.elf.dir/Core/Src/main.c.obj" \
@@ -349,7 +362,8 @@ QEABoatSTM32_elf_OBJECTS = \
 "CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c.obj" \
 "CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c.obj" \
 "CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c.obj" \
-"CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c.obj"
+"CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c.obj" \
+"CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.obj"
 
 # External object files for target QEABoatSTM32.elf
 QEABoatSTM32_elf_EXTERNAL_OBJECTS =
@@ -374,9 +388,10 @@ QEABoatSTM32.elf: CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/S
 QEABoatSTM32.elf: CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c.obj
 QEABoatSTM32.elf: CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c.obj
 QEABoatSTM32.elf: CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c.obj
+QEABoatSTM32.elf: CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.obj
 QEABoatSTM32.elf: CMakeFiles/QEABoatSTM32.elf.dir/build.make
 QEABoatSTM32.elf: CMakeFiles/QEABoatSTM32.elf.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Linking C executable QEABoatSTM32.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking C executable QEABoatSTM32.elf"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/QEABoatSTM32.elf.dir/link.txt --verbose=$(VERBOSE)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Building /Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/cmake-build-release/QEABoatSTM32.hex"
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Building /Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/cmake-build-release/QEABoatSTM32.bin"

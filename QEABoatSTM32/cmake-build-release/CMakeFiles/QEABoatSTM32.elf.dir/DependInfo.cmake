@@ -44,6 +44,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c" "/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/cmake-build-release/CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c.obj"
   "/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c" "/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/cmake-build-release/CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c.obj"
   "/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c" "/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/cmake-build-release/CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c.obj"
+  "/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c" "/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/cmake-build-release/CMakeFiles/QEABoatSTM32.elf.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

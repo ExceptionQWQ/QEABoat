@@ -252,6 +252,9 @@
 		<Unit filename="/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h">
 			<Option target="QEABoatSTM32.elf"/>
 		</Unit>
+		<Unit filename="/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h">
+			<Option target="QEABoatSTM32.elf"/>
+		</Unit>
 		<Unit filename="/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/License.md">
 			<Option target="QEABoatSTM32.elf"/>
 		</Unit>
@@ -292,6 +295,9 @@
 			<Option target="QEABoatSTM32.elf"/>
 		</Unit>
 		<Unit filename="/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c">
+			<Option target="QEABoatSTM32.elf"/>
+		</Unit>
+		<Unit filename="/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c">
 			<Option target="QEABoatSTM32.elf"/>
 		</Unit>
 		<Unit filename="/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/STM32F103C8TX_FLASH.ld">
