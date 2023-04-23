@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -36,8 +37,14 @@ public class MainActivity extends Activity {
     private TextView batteryLevelView;
     private TextView speedLevelView;
 
+    private Button pedalUp;
+    private Button pedalDown;
+    private Button pedalLeft;
+    private Button pedalRight;
+
     public static Handler updateBatteryLevel;
     public static Handler updateSpeedLevel;
+    public static Handler updateConnectStatus;
 
     public boolean setConnectStatus(boolean status)
     {
@@ -70,15 +77,48 @@ public class MainActivity extends Activity {
         connectStatusView = findViewById(R.id.connectStatusText);
         batteryLevelView = findViewById(R.id.batteryLevelText);
         speedLevelView = findViewById(R.id.speedLevelText);
+        pedalUp = findViewById(R.id.pedalUp);
+        pedalDown = findViewById(R.id.pedalDown);
+        pedalRight = findViewById(R.id.pedalRight);
+        pedalLeft = findViewById(R.id.pedalLeft);
 
         setConnectStatus(false);
         setBatteryLevel(0);
         setSpeedLevel(0);
     }
 
-    private void RegistSeekBarListener()
+    private void RegistPedalListener()
     {
+        new ReportThread().start();
 
+        pedalUp.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                ReportThread.upFlags = 100;
+                return false;
+            }
+        });
+        pedalDown.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                ReportThread.downFlags = 100;
+                return false;
+            }
+        });
+        pedalLeft.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                ReportThread.leftFlags = 100;
+                return false;
+            }
+        });
+        pedalRight.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                ReportThread.rightFlags = 100;
+                return false;
+            }
+        });
     }
 
     @Override
@@ -95,9 +135,8 @@ public class MainActivity extends Activity {
         }
 
         InitAllViewComponent();
-        RegistSeekBarListener();
+        RegistPedalListener();
 
-        new ScheduleEngine().start();
 
         ijkMediaPlayerView = findViewById(R.id.ijkMediaPlayerView);
         ijkMediaPlayerView.setListener(new VideoPlayerListener() {
@@ -153,6 +192,20 @@ public class MainActivity extends Activity {
             @Override
             public boolean handleMessage(@NonNull Message message) {
                 speedLevelView.setText("运行速度：" + message.obj);
+                return false;
+            }
+        });
+
+        updateConnectStatus = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message message) {
+                if ("已连接".equals(message.obj)) {
+                    connectStatusView.setText("连接状态：已连接");
+                    connectStatusView.setTextColor(Color.GREEN);
+                } else {
+                    connectStatusView.setText("连接状态：未连接");
+                    connectStatusView.setTextColor(Color.RED);
+                }
                 return false;
             }
         });

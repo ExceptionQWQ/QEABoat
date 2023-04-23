@@ -245,6 +245,8 @@ stm32f1xx_hal_def.h
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h
 
 /Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Core/Src/main.c
+string.h
+/Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Core/Src/string.h
 main.h
 /Users/mac/Desktop/QEABoat-WorkSpace/QEABoat/QEABoatSTM32/Core/Src/main.h
 

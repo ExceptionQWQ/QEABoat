@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import main.Log;
+import main.StatusMachine;
 
 public class APPHandler extends Thread{
 	private Socket socket;
@@ -54,6 +55,26 @@ public class APPHandler extends Thread{
 	{
 		return String.valueOf(ParamData.speedLevel);
 	}
+	private String GoUp()
+	{
+		StatusMachine.upFlags = 1;
+		return "OK";
+	}
+	private String GoDown()
+	{
+		StatusMachine.downFlags = 1;
+		return "OK";
+	}
+	private String GoLeft()
+	{
+		StatusMachine.leftFlags = 1;
+		return "OK";
+	}
+	private String GoRight()
+	{
+		StatusMachine.rightFlags = 1;
+		return "OK";
+	}
 	
 	private String Handle(String msg)
 	{
@@ -66,8 +87,16 @@ public class APPHandler extends Thread{
 			return GetBatteryLevel();
 		case "GetSpeedLevel":
 			return GetSpeedLevel();
+		case "w":
+			return GoUp();
+		case "s":
+			return GoDown();
+		case "a":
+			return GoLeft();
+		case "d":
+			return GoRight();
 		}
-		return "";
+		return "null";
 	}
 	
 	public void run()

@@ -15,6 +15,7 @@
   *
   ******************************************************************************
   */
+#include "string.h"
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -43,6 +44,7 @@ TIM_HandleTypeDef htim1;
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 
@@ -54,12 +56,240 @@ static void MX_GPIO_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
+static void MX_USART3_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+struct StatusMachine
+{
+    int upFlags;
+    int downFlags;
+    int leftFlags;
+    int rightFlags;
+    int channel_1_pwm;
+    int channel_2_pwm;
+    int channel_3_pwm;
+    int channel_4_pwm;
+}sm;
+
+void UpdateStatus()
+{
+    if (sm.upFlags > 0) {
+        sm.upFlags -= 10;
+        if (sm.upFlags < 0) sm.upFlags = 0;
+        sm.channel_1_pwm = 0;
+        sm.channel_2_pwm += 100;
+        sm.channel_3_pwm = 0;
+        sm.channel_4_pwm += 100;
+    }
+    if (sm.downFlags > 0) {
+        sm.downFlags -= 10;
+        if (sm.downFlags < 0) sm.downFlags = 0;
+        sm.channel_1_pwm += 100;
+        sm.channel_2_pwm = 0;
+        sm.channel_3_pwm += 100;
+        sm.channel_4_pwm = 0;
+    }
+    if (sm.leftFlags > 0) {
+        sm.leftFlags -= 10;
+        if (sm.leftFlags < 0) sm.leftFlags = 0;
+        if (sm.upFlags) {
+            sm.channel_1_pwm = 0;
+            sm.channel_2_pwm += 900;
+            sm.channel_3_pwm += 900;
+            sm.channel_4_pwm = 0;
+        } else if (sm.downFlags) {
+            sm.channel_1_pwm += 900;
+            sm.channel_2_pwm = 0;
+            sm.channel_3_pwm = 0;
+            sm.channel_4_pwm += 900;
+        }
+    }
+    if (sm.rightFlags > 0) {
+        sm.rightFlags -= 10;
+        if (sm.rightFlags < 0) sm.rightFlags = 0;
+        if (sm.upFlags) {
+            sm.channel_1_pwm += 900;
+            sm.channel_2_pwm = 0;
+            sm.channel_3_pwm = 0;
+            sm.channel_4_pwm += 900;
+        } else if (sm.downFlags) {
+            sm.channel_1_pwm = 0;
+            sm.channel_2_pwm += 900;
+            sm.channel_3_pwm += 900;
+            sm.channel_4_pwm = 0;
+        }
+    }
+
+    if (sm.upFlags == 0 && sm.downFlags == 0) {
+        sm.channel_1_pwm = 0;
+        sm.channel_2_pwm = 0;
+        sm.channel_3_pwm = 0;
+        sm.channel_4_pwm = 0;
+    }
+
+    if (sm.channel_1_pwm > 1000) sm.channel_1_pwm = 1000;
+    if (sm.channel_1_pwm < 0) sm.channel_1_pwm = 0;
+    if (sm.channel_2_pwm > 1000) sm.channel_2_pwm = 1000;
+    if (sm.channel_2_pwm < 0) sm.channel_2_pwm = 0;
+    if (sm.channel_3_pwm > 1000) sm.channel_3_pwm = 1000;
+    if (sm.channel_3_pwm < 0) sm.channel_3_pwm = 0;
+    if (sm.channel_4_pwm > 1000) sm.channel_4_pwm = 1000;
+    if (sm.channel_4_pwm < 0) sm.channel_4_pwm = 0;
+
+
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, sm.channel_1_pwm);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, sm.channel_2_pwm);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, sm.channel_3_pwm);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, sm.channel_4_pwm);
+}
+
+void HandleDebugCommand(char cmd)
+{
+    switch (cmd) {
+        case 'w':
+            sm.upFlags = 100;
+            sm.downFlags = 0;
+            break;
+        case 's':
+            sm.upFlags = 0;
+            sm.downFlags = 100;
+            break;
+        case 'a':
+            sm.leftFlags = 100;
+            sm.rightFlags = 0;
+            break;
+        case 'd':
+            sm.leftFlags = 0;
+            sm.rightFlags = 100;
+            break;
+    }
+}
+
+void HandleWiFiCommand(char cmd)
+{
+    switch (cmd) {
+        case 'w':
+            sm.upFlags = 100;
+            sm.downFlags = 0;
+            break;
+        case 's':
+            sm.upFlags = 0;
+            sm.downFlags = 100;
+            break;
+        case 'a':
+            sm.leftFlags = 100;
+            sm.rightFlags = 0;
+            break;
+        case 'd':
+            sm.leftFlags = 0;
+            sm.rightFlags = 100;
+            break;
+    }
+}
+
+void HandlePiCommand(char cmd)
+{
+    switch (cmd) {
+        case 'w':
+            sm.upFlags = 100;
+            sm.downFlags = 0;
+            break;
+        case 's':
+            sm.upFlags = 0;
+            sm.downFlags = 100;
+            break;
+        case 'a':
+            sm.leftFlags = 100;
+            sm.rightFlags = 0;
+            break;
+        case 'd':
+            sm.leftFlags = 0;
+            sm.rightFlags = 100;
+            break;
+    }
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
+{
+    static char debugRecvBuff[1] = {0};
+    static char wifiRecvBuff[1] = {0};
+    static char piRecvBuff[1] = {0};
+
+    if (huart->Instance == USART1) { //串口调试
+        HAL_UART_Transmit_IT(&huart1, debugRecvBuff, 1);
+        HandleDebugCommand(debugRecvBuff[0]);
+        HAL_UART_Receive_IT(huart, debugRecvBuff, 1);
+    } else if (huart->Instance == USART2) { //ESP8266 WiFi模块
+        HAL_UART_Transmit_IT(&huart1, wifiRecvBuff, 1);
+        HandleWiFiCommand(wifiRecvBuff[0]);
+        HAL_UART_Receive_IT(huart, wifiRecvBuff, 1);
+    } else if (huart->Instance == USART3) { //树莓派4B
+        HAL_UART_Transmit_IT(&huart1, piRecvBuff, 1);
+        HandlePiCommand(piRecvBuff[0]);
+        HAL_UART_Receive_IT(huart, piRecvBuff, 1);
+    }
+}
+
+
+void EnableDebugUart()
+{
+    HAL_UART_RxCpltCallback(&huart1);
+}
+
+void EnableWiFiUart()
+{
+    HAL_UART_RxCpltCallback(&huart2);
+}
+
+void EnablePiUart()
+{
+    HAL_UART_RxCpltCallback(&huart3);
+}
+
+void EnableESP8266Server()
+{
+    HAL_Delay(1000); //等待ESP8266启动完成
+    char cmd1[] = "AT+CIPMUX=1\r\n";
+    HAL_UART_Transmit_IT(&huart2, cmd1, strlen(cmd1));
+    HAL_Delay(100);
+    char cmd2[] = "AT+CIPSERVER=1,8896\r\n";
+    HAL_UART_Transmit_IT(&huart2, cmd2, strlen(cmd2));
+    HAL_Delay(100);
+}
+
+void EnablePWMOutput()
+{
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
+
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, 0);
+}
+
+void LaunchSuccess()
+{
+    for (int i = 0; i < 10; ++i) {
+        __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 100);
+        __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
+        __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 100);
+        __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, 0);
+        HAL_Delay(100);
+        __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
+        __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
+        __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
+        __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, 0);
+        HAL_Delay(100);
+    }
+}
 
 /* USER CODE END 0 */
 
@@ -94,11 +324,25 @@ int main(void)
   MX_TIM1_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
+  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
 
-    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+    EnablePWMOutput();
 
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 1000);
+    EnableDebugUart();
+    EnableWiFiUart();
+    EnablePiUart();
+
+    EnableESP8266Server();
+
+    char data[] = "Hello World!\r\n";
+    HAL_UART_Transmit_IT(&huart1, data, strlen(data));
+    HAL_UART_Transmit_IT(&huart3, data, strlen(data));
+    HAL_Delay(100);
+
+
+    LaunchSuccess();
+
 
   /* USER CODE END 2 */
 
@@ -109,6 +353,7 @@ int main(void)
 
       HAL_Delay(20);
       HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+      UpdateStatus();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -177,7 +422,7 @@ static void MX_TIM1_Init(void)
   htim1.Instance = TIM1;
   htim1.Init.Prescaler = 72 - 1;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 20000 - 1;
+  htim1.Init.Period = 1000 - 1;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
@@ -208,6 +453,18 @@ static void MX_TIM1_Init(void)
   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
   sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
   if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
   {
     Error_Handler();
   }
@@ -296,6 +553,39 @@ static void MX_USART2_UART_Init(void)
 }
 
 /**
+  * @brief USART3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART3_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART3_Init 0 */
+
+  /* USER CODE END USART3_Init 0 */
+
+  /* USER CODE BEGIN USART3_Init 1 */
+
+  /* USER CODE END USART3_Init 1 */
+  huart3.Instance = USART3;
+  huart3.Init.BaudRate = 115200;
+  huart3.Init.WordLength = UART_WORDLENGTH_8B;
+  huart3.Init.StopBits = UART_STOPBITS_1;
+  huart3.Init.Parity = UART_PARITY_NONE;
+  huart3.Init.Mode = UART_MODE_TX_RX;
+  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART3_Init 2 */
+
+  /* USER CODE END USART3_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -308,6 +598,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET);
