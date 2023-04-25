@@ -57,22 +57,34 @@ public class APPHandler extends Thread{
 	}
 	private String GoUp()
 	{
-		StatusMachine.upFlags = 1;
+		StatusMachine.upFlags = System.currentTimeMillis();
+		StatusMachine.downFlags = 0;
 		return "OK";
 	}
 	private String GoDown()
 	{
-		StatusMachine.downFlags = 1;
+		StatusMachine.upFlags = 0;
+		StatusMachine.downFlags = System.currentTimeMillis();
 		return "OK";
 	}
 	private String GoLeft()
 	{
-		StatusMachine.leftFlags = 1;
+		StatusMachine.rightFlags = 0;
+		StatusMachine.leftFlags = System.currentTimeMillis();
 		return "OK";
 	}
 	private String GoRight()
 	{
-		StatusMachine.rightFlags = 1;
+		StatusMachine.leftFlags = 0;
+		StatusMachine.rightFlags = System.currentTimeMillis();
+		return "OK";
+	}
+	private String Stop()
+	{
+		StatusMachine.upFlags = 0;
+		StatusMachine.downFlags = 0;
+		StatusMachine.rightFlags = 0;
+		StatusMachine.leftFlags = 0;
 		return "OK";
 	}
 	
@@ -95,6 +107,8 @@ public class APPHandler extends Thread{
 			return GoLeft();
 		case "d":
 			return GoRight();
+		case "p":
+			return Stop();
 		}
 		return "null";
 	}

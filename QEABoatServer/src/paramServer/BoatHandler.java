@@ -39,20 +39,16 @@ public class BoatHandler extends Thread{
 	{
 		ParamData.boatHeartBeat = System.currentTimeMillis();
 		byte ret[] = new byte[4];
-		if (StatusMachine.upFlags > 0) {
-			StatusMachine.upFlags = 0;
+		if (Math.abs(StatusMachine.upFlags - ParamData.boatHeartBeat) < 1000l) {
 			ret[0] = 'w';
 		}
-		if (StatusMachine.downFlags > 0) {
-			StatusMachine.downFlags = 0;
+		if (Math.abs(StatusMachine.downFlags - ParamData.boatHeartBeat) < 1000l) {
 			ret[1] = 's';
 		}
-		if (StatusMachine.leftFlags > 0) {
-			StatusMachine.leftFlags = 0;
+		if (Math.abs(StatusMachine.leftFlags - ParamData.boatHeartBeat) < 1000l) {
 			ret[2] = 'a';
 		}
-		if (StatusMachine.rightFlags > 0) {
-			StatusMachine.rightFlags = 0;
+		if (Math.abs(StatusMachine.rightFlags - ParamData.boatHeartBeat) < 1000l) {
 			ret[3] = 'd';
 		}
 		return ret;

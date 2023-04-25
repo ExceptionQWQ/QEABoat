@@ -7,6 +7,7 @@ public class ReportThread extends Thread{
     public static int downFlags = 0;
     public static int leftFlags = 0;
     public static int rightFlags = 0;
+    public static int stopFlags = 0;
 
     private void GetConnectStatus()
     {
@@ -35,22 +36,39 @@ public class ReportThread extends Thread{
     {
         int cnt = 0;
         while (true) {
+            try {
+                sleep(100);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             ++cnt;
-            if (cnt % 50 == 0) {
+            if (cnt % 10 == 0) {
                 GetBatteryLevel();
                 GetSpeedLevel();
                 GetConnectStatus();
             }
+            if (stopFlags > 0) {
+                stopFlags -= 100;
+                upFlags = 0;
+                downFlags = 0;
+                leftFlags = 0;
+                rightFlags = 0;
+                try {
+                    Request.Request("p");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                continue;
+            }
             if (upFlags > 0) {
-                upFlags -= 25;
+                upFlags -= 100;
                 try {
                     Request.Request("w");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-            if (downFlags > 0) {
-                downFlags -= 25;
+            } else if (downFlags > 0) {
+                downFlags -= 100;
                 try {
                     Request.Request("s");
                 } catch (Exception e) {
@@ -58,25 +76,19 @@ public class ReportThread extends Thread{
                 }
             }
             if (leftFlags > 0) {
-                leftFlags -= 25;
+                leftFlags -= 100;
                 try {
                     Request.Request("a");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-            if (rightFlags > 0) {
-                rightFlags -= 25;
+            } else if (rightFlags > 0) {
+                rightFlags -= 100;
                 try {
                     Request.Request("d");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-            try {
-                sleep(10);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }

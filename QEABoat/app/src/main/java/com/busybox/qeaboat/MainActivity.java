@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -98,11 +99,23 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
+        pedalUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ReportThread.stopFlags = 100;
+            }
+        });
         pedalDown.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 ReportThread.downFlags = 100;
                 return false;
+            }
+        });
+        pedalDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ReportThread.stopFlags = 100;
             }
         });
         pedalLeft.setOnTouchListener(new View.OnTouchListener() {
@@ -112,11 +125,23 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
+        pedalLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ReportThread.stopFlags = 100;
+            }
+        });
         pedalRight.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 ReportThread.rightFlags = 100;
                 return false;
+            }
+        });
+        pedalRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ReportThread.stopFlags = 100;
             }
         });
     }
