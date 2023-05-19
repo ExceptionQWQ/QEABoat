@@ -1,0 +1,13 @@
+# Target labels
+ Extra
+ opencv_aruco
+ PerfTest
+# Source files and their labels
+/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/aruco/perf/perf_main.cpp
+ Extra
+ opencv_aruco
+ PerfTest
+/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/aruco/perf/perf_precomp.hpp
+ Extra
+ opencv_aruco
+ PerfTest

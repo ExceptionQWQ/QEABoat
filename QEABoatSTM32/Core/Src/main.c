@@ -328,18 +328,15 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
     EnablePWMOutput();
-
     EnableDebugUart();
     EnableWiFiUart();
     EnablePiUart();
-
     EnableESP8266Server();
 
     char data[] = "Hello World!\r\n";
     HAL_UART_Transmit_IT(&huart1, data, strlen(data));
     HAL_UART_Transmit_IT(&huart3, data, strlen(data));
     HAL_Delay(100);
-
 
     LaunchSuccess();
 

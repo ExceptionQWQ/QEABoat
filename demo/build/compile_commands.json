@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/mac/Desktop/OpenCV-WorkSpace/demo/build",
+  "command": "/usr/bin/clang++  -isystem /Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/bin/include/opencv4 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -std=gnu++2a -o CMakeFiles/demo.dir/demo.cpp.o -c /Users/mac/Desktop/OpenCV-WorkSpace/demo/demo.cpp",
+  "file": "/Users/mac/Desktop/OpenCV-WorkSpace/demo/demo.cpp"
+}
+]

@@ -1,0 +1,17 @@
+# Target labels
+ Extra
+ opencv_wechat_qrcode
+ AccuracyTest
+# Source files and their labels
+/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/wechat_qrcode/test/test_main.cpp
+ Extra
+ opencv_wechat_qrcode
+ AccuracyTest
+/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/wechat_qrcode/test/test_qrcode.cpp
+ Extra
+ opencv_wechat_qrcode
+ AccuracyTest
+/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/wechat_qrcode/test/test_precomp.hpp
+ Extra
+ opencv_wechat_qrcode
+ AccuracyTest

@@ -154,7 +154,7 @@ public class MainActivity extends Activity {
         try {
             IjkMediaPlayer.loadLibrariesOnce(null);
             IjkMediaPlayer.native_profileBegin("libijkplayer.so");
-            //ffmpeg暂时使用v7a的库，因为arm64的库会大概率闪退
+            //ffmpeg暂时使用v7a的库，因为arm64的库会大概率闪退，不知道是啥原因
         } catch (Exception e) {
             this.finish();
         }

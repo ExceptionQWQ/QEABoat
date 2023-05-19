@@ -1,0 +1,51 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/barcode/test/test_barcode.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_barcode",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/barcode/test/test_main.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_barcode",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/barcode/test/test_precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_barcode",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/barcode/test/utils.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_barcode",
+				"AccuracyTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_barcode",
+			"AccuracyTest"
+		],
+		"name" : "opencv_test_barcode"
+	}
+}

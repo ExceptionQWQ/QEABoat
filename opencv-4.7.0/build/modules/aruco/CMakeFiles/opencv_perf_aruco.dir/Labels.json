@@ -1,0 +1,33 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/aruco/perf/perf_main.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_aruco",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/aruco/perf/perf_precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_aruco",
+				"PerfTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_aruco",
+			"PerfTest"
+		],
+		"name" : "opencv_perf_aruco"
+	}
+}

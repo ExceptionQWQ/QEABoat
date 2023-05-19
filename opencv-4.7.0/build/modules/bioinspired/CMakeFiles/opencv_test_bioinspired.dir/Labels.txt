@@ -1,0 +1,17 @@
+# Target labels
+ Extra
+ opencv_bioinspired
+ AccuracyTest
+# Source files and their labels
+/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/bioinspired/test/test_main.cpp
+ Extra
+ opencv_bioinspired
+ AccuracyTest
+/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/bioinspired/test/test_retina_ocl.cpp
+ Extra
+ opencv_bioinspired
+ AccuracyTest
+/Users/mac/Desktop/OpenCV-WorkSpace/opencv-4.7.0/opencv_contrib-4.7.0/modules/bioinspired/test/test_precomp.hpp
+ Extra
+ opencv_bioinspired
+ AccuracyTest
